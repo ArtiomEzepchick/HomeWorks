@@ -28,43 +28,37 @@
 
 // ПЕРВОЕ РЕШЕНИЕ
 
-// function sumTo(n) {
+function sumToCycleUsed(n) {
+    let result = 0;
 
-//     let result = 0;
+    for (let i = 0; i <= n; i++) {
+        result += i;
+    };
 
-//     if (n === 1) {
-//         return n;
-//     };
+    return result;
+};
 
-//     for (let i = 0; i <= n; i++) {
-//         result += i;
-//     };
-
-//     return result;
-// };
-
-// console.log(sumTo(4));
+console.log(sumToCycleUsed(4));
 
 // ВТОРОЕ РЕШЕНИЕ
 
-// function sumTo(n) {
+function sumToRecursionUsed(n) {
+    if (n === 1) {
+        return n;
+    };
 
-//     if (n === 1) {
-//         return n;
-//     };
+    return n + sumToRecursionUsed(n - 1);
+};
 
-//     return n + sumTo(n-1);
-// };
-
-// console.log(sumTo(100));
+console.log(sumToRecursionUsed(100));
 
 // ТРЕТЬЕ РЕШЕНИЕ
 
-// function sumTo(n) {
-//     return n * (n + 1) / 2;
-// };
+function sumToFormula(n) {
+    return n * (n + 1) / 2;
+};
 
-// console.log(sumTo(4));
+console.log(sumToFormula(4));
 
 // Предполагаю, что самым медленным будет решение задачи с помощью рекурсии ввиду вложенных функций, 
 // на втором месте - цикл, на третьем формула, т.к. она выглядит проще всего: нет переброра как в цикле, нет вложенных функций как в рекурсии
@@ -91,16 +85,15 @@
 // alert( factorial(5) ); // 120
 // P.S. Подсказка: n! можно записать как n * (n-1)! Например: 3! = 3*2! = 3*2*1! = 6
 
-// function factorial(n) {
+function factorial(n) {
+    if (n === 1) {
+        return n;
+    };
 
-//     if (n === 1) {
-//         return n;
-//     };
+    return n * factorial(n - 1);
+};
 
-//     return n * factorial(n - 1);
-// };
-
-// console.log(factorial(5));
+console.log(factorial(5));
 
 
 // Последовательность чисел Фибоначчи определяется формулой Fn = Fn-1 + Fn-2. То есть, 
@@ -131,11 +124,28 @@
 
 // console.log(fib(7));
 
+
+function fib(n) {
+    let a = 1;
+    let b = 1;
+
+    for (let i = 3; i <= n; i++) {
+      let c = a + b;
+      a = b;
+      b = c;
+    };
+
+    return b;
+  };
+
+console.log(fib(7));
+
+
 // ЗАДАЧА №4
 
 // Допустим, у нас есть односвязный список (как описано в главе Рекурсия и стек):
 
-// let list = {
+// const list = {
 //   value: 1,
 //   next: {
 //     value: 2,
@@ -154,7 +164,7 @@
 
 // Как лучше: с рекурсией или без?
 
-// let list = {
+// const list = {
 //   value: 1,
 
 //   next: {
@@ -180,7 +190,7 @@
 //     };
 // };
 
-// console.log(printList(list));
+// printList(list)
 
 // Второе решение
 
@@ -194,4 +204,4 @@
 //     };
 // };
 
-// console.log(printList(list));
+// printList(list);
