@@ -28,10 +28,9 @@ delay(3000).then(() => alert('выполнилось через 3 секунды
 // МОЁ РЕШЕНИЕ НИЖЕ
 
 function newDelay(ms) {
-    const delayPromise = new Promise((resolve) => {
+    return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
-    return delayPromise;
 };
 
 newDelay(3000).then(() => console.log('выполнилось через 3 секунды'))
@@ -122,7 +121,8 @@ promise.then(f1).catch(f2);
 
 promise.then(f1, f2);
 
-// ОТВЕТ: Не эквивалентны, т.к. в первом случае, если будет ошибка - она обработается с помощью catch, а во втором случае - ошибка не будет обработана
+// ОТВЕТ: Не эквивалентны, т.к. в первом случае, если будет ошибка - она обработается с помощью catch, а во втором случае нету 
+// следующего по цепочке then/catch - поэтому ошибка будет не обработана
 
 // ЗАДАЧА №5
 
@@ -234,7 +234,7 @@ async function loadJson(url) {
 };
 
 async function demoGithubUser() {
-    const gitHubUser;
+    let gitHubUser;
 
     while(true) {
         let name = prompt("Введите логин?", "iliakan");
@@ -244,7 +244,7 @@ async function demoGithubUser() {
             console.log(`Полное имя: ${gitHubUser.name}.`);
             break;
         } catch {
-            err instanceof HttpError && err.response.status == 404 ? 
+            err instanceof HttpError && err.response.status === 404 ? 
             console.log("Такого пользователя не существует, пожалуйста, повторите ввод.") : err
         }
     }
