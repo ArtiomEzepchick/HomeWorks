@@ -163,10 +163,16 @@ loadJson('no-such-user.json')
 async function loadNewJson(url) {
     const response = await fetch(url);
 
-    response.status == 200 ? response.json() : new Error(response.status);
-}
+    try {
+      if (response.status === 200) {
+        return response.json();
+      };
+     } catch {
+        throw new Error(response.status)
+  };
+};
 
-loadNewJson('no-such-user.json').catch(console.log); // Error: 404
+loadNewJson('no-such-user.json')
 
 // ЗАДАЧА №7
 
@@ -229,8 +235,13 @@ class HttpError extends Error {
 
 async function loadJson(url) {
     const response = await fetch(url);
-
-    response.status == 200 ? response.json() : new HttpError(response);
+    try {
+      if (response.status === 200) {
+        return response.json();
+      };
+     } catch {
+        throw new Error(response.status)
+  };
 };
 
 async function demoGithubUser() {
@@ -246,11 +257,11 @@ async function demoGithubUser() {
         } catch {
             err instanceof HttpError && err.response.status === 404 ? 
             console.log("Такого пользователя не существует, пожалуйста, повторите ввод.") : err
-        }
-    }
+        };
+    };
 
-    return gitHubUser
-}
+    return gitHubUser;
+};
 
 demoGithubUser();
 
