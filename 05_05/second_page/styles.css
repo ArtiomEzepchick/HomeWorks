@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    width: 9rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.root-divs-styles {
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid black;
+}
+
+.background-yellow {
+    background: yellow;
+}
+
