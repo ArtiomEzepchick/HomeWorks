@@ -5,18 +5,31 @@
 }
 
 #root {
-    width: 9rem;
+    width: 15rem;
     display: flex;
     flex-wrap: wrap;
 }
 
 .root-divs-styles {
-    width: 3rem;
-    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
     border: 1px solid black;
+    font-size: 1rem;
+}
+
+.root-inner-divs-styles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid black;
+    font-size: 1rem;
 }
 
 .background-yellow {
     background: yellow;
 }
-

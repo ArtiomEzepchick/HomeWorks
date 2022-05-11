@@ -2,19 +2,11 @@ const body = document.querySelector('body'); // можно было присво
 const divRoot = document.getElementById('root');
 const p = document.createElement('p');
 const article = document.createElement('article');
-const articleInnerP = document.createElement('p');
+const articleInnerP = p.cloneNode();
 const link = document.createElement('a');
 const ul = document.createElement('ul');
-const li1 = document.createElement('li');
-const li2 = li1.cloneNode();
-const li3 = li1.cloneNode();
-const li4 = li1.cloneNode();
 const table = document.createElement('table');
 const tr = document.createElement('tr');
-const td1 = document.createElement('td');
-const td2 = td1.cloneNode();
-const td3 = td1.cloneNode();
-const td4 = td1.cloneNode();
 const input = document.createElement('input');
 
 body.className = 'background-color-aqua';
@@ -53,6 +45,7 @@ article.addEventListener('mouseover', e => {
 });
 
 article.append(articleInnerP);
+
 article.children[3].className = 'underline';
 
 articleInnerP.style = `
@@ -78,24 +71,22 @@ table.style.marginBottom = '30rem';
 
 table.append(tr);
 
-tr.append(td1);
-tr.append(td2);
-tr.append(td3);
-tr.append(td4);
+for (let i = 0; i < 4; i++) {
+    tr.append(document.createElement('td'));
+}
 
 tr.lastElementChild.addEventListener('click', e => {
     tr.lastElementChild.classList.toggle('font-size-4rem');
-    window.scrollBy(0,200);
+    window.scrollBy(0,350);
 });
 
 tr.getElementsByTagName('td').className = 'border-1px-dotted';
 
-td1.innerText = 'Some text';
-td2.innerText = 'More text';
-td3.innerText = td1.innerText;
-td4.className = 'underline';
+tr.lastChild.className = 'underline';
 
 for (let td of tr.children) {
+    td.innerText = 'Some text';
+
     td.style = `
     border: 1px dotted black;
     padding: 1rem;
@@ -106,7 +97,7 @@ for (let td of tr.children) {
     };
 };
 
-td2.closest('table').style.backgroundColor = 'aqua';
+tr.closest('table').style.backgroundColor = 'aqua';
 
 table.before(input);
 
@@ -119,13 +110,12 @@ input.style = `
 `;
 
 input.type = 'password';
-input.maxLength;
 
-if (input.getAttribute('maxLength') === null) {
+if (!input.getAttribute('maxLength')) {
     input.setAttribute('maxLength', '13')
 };
 
-if (input.hasAttribute('placeholder') === false) {
+if (!input.hasAttribute('placeholder')) {
     input.setAttribute('placeholder', 'Type your password here');
 };
 
@@ -133,13 +123,12 @@ article.after(ul)
 
 ul.style.paddingTop = '2rem';
 
-ul.append(li1)
-ul.append(li2)
-ul.append(li3)
-ul.append(li4)
+for (let i = 0; i < 4; i++) {
+    ul.append(document.createElement('li'));
+}
 
 for (let li of ul.children) {
-    li.innerText = 'Same text has all li thanks to cycle "for"';
+    li.innerText = 'Same text has all li thanks to "for" loop';
     li.className = 'color-blue';
 };
 
