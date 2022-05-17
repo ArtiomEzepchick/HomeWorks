@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.background-color-aqua {
+    background-color: rgb(209, 255, 240);
+}
+
+.color-red {
+    color: red;
+}
+
+.color-blue {
+    color: blue;
+}
+
+.font-size-4rem {
+    font-size: 4rem;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.border-1px-dotted {
+    border: 1px dotted black;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+[data-background-color="red"] {
+    background-color: rgb(255, 213, 213);
+}
+
+[data-background-color="white"] {
+    background-color: white;
+}
+
