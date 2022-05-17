@@ -1,0 +1,86 @@
+main {
+    padding: 7rem 0 4rem;
+}
+
+main
+.contacts-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 2rem;
+}
+
+main
+.contacts-container
+.short-info-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1rem 0 4rem;
+}
+
+main
+.contacts-container
+.short-info-block
+a {
+    color: black;
+}
+
+main
+.contacts-container
+.short-info-block
+a:hover {
+    color: red;
+}
+
+main
+.contacts-container
+.short-info-block
+.schedule-info
+.schedule-cars-showroom-info,
+main 
+.contacts-container
+.short-info-block
+.schedule-info
+.schedule-service-center-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+main
+.contacts-container
+.main-dealership-photo {
+    width: 100%;
+}
+
+main
+.about-us-banner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 3rem 0;
+}
+
+main
+.about-us-banner
+.about-us-banner-img {
+    width: 100%;
+}
+
+main
+.about-us-banner
+span {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    position: absolute;
+    font-size: 7rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+

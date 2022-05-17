@@ -1,0 +1,76 @@
+@import url(styles/reset.css);
+@import url(styles/header.css);
+@import url(styles/main.css);
+@import url(styles/footer.css);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1,
+h2 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    margin: 1rem 0;
+    font-size: 1.8rem;
+}
+
+h3 {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+hr {
+    border: 1px solid #f0f0f0;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.text-color-grey-small {
+    color: grey;
+    font-size: 1.5rem;
+}
+
+.background-color-red {
+    color: white;
+    display: inline-block;
+    padding: 0 1rem;
+    background-color: red;
+}
+
+.model-image-width {
+    width: 100%;
+}
+
+#button-page-up {   
+    display: block;
+    opacity: 0;
+    visibility: hidden;   
+    font-size: 4rem;  
+    position: fixed;   
+    bottom: 3rem;   
+    right: 2.5rem;     
+    z-index: 20; 
+    transition: all 0.3s ease;
+} 
+
+#button-page-up.show {
+    opacity: 0.6;
+    visibility: visible;
+}
+
+#button-page-up.show:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
