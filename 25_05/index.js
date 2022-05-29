@@ -56,6 +56,10 @@ for (let input of inputs) {
     });
 
     input.addEventListener('blur', event => {
+        if (input.name !== 'pass') {
+            return input.value = input.value.trim();
+        };
+
         if (input.name !== 'fname' && input.name !== 'lname' && input.name !== 'terms') {
             if (input.value.length <= 4) { // проверка на количество символов во всех инпутах, кроме fname, lname, terms
                 createError(input, 'must contain at least 5 characters');
@@ -63,7 +67,7 @@ for (let input of inputs) {
             };
 
             if (input.value.includes(' ')) { // проверка на пробелы во всех инпутах, кроме fname и lname
-                createError(input, "can't contain spacebars");
+                createError(input, "can't contain spaces");
                 return;
             };
 
@@ -74,7 +78,7 @@ for (let input of inputs) {
                     return;
                 };
 
-                if (input.value.includes('.ru')) { // проверка на домен .ru
+                if (input.value.endsWith('.ru')) {
                     createError(input, "with such domain name can't be used here");
                     return;
                 };
@@ -126,6 +130,8 @@ clearBtn.addEventListener('click', (event) => {
 });
 
 submitBtn.addEventListener('click', (event) => {
+    const checkLengthOfErrorsContainer = !Object.keys(errorsContainer).length;
+
     event.preventDefault();
 
     for (let input of inputs) {
@@ -135,12 +141,12 @@ submitBtn.addEventListener('click', (event) => {
     };
 
     if (termsCheckbox.checked) {
-        !Object.keys(errorsContainer).length ? 
+        !checkLengthOfErrorsContainer ? 
         alert('Submitted!') : alert("Can't submit: you have some problems, please check red inputs");
     } else {
         alert("Can't submit: you must accept the terms before submit");
         
-        !Object.keys(errorsContainer).length ? 
+        !checkLengthOfErrorsContainer ? 
         alert('The rest of the fields are ok') : alert('And you have some other problems, please check red inputs');
     };
 });
