@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.fitem {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    margin: 10px 0;
+    position: relative;
+}
+
+.fitem input {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.fitem span {
+    position: absolute;
+    bottom: -16px;
+    right: 0;
+    color: red;
+    font-size: 13px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    width: 70px;
+    padding: 5px;
+    margin: 15px;
+}
+
+.fitem input.error {
+    border: 1px solid red;
+}
+
+.fitem input.success {
+    border: 1px solid blue;
+}
+
+.terms {
+    padding: 2rem 0;
+}
