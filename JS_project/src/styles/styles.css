@@ -4,12 +4,24 @@
     box-sizing: border-box;
 }
 
-.color-aqua {
-    color: #219ebc;
-}
-
 body {
     font-family: 'Anek Malayalam', sans-serif;
+}
+
+.btn {
+    width: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 2rem;
+    background-color: #f0f0f0;
+    border-radius: 1rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.color-aqua {
+    color: #219ebc;
 }
 
 .header {
@@ -36,31 +48,56 @@ h1
 }
 
 .header
-#registration-button {
-    display: flex;
+#registration-btn {
     justify-content: center;
-    align-items: center;
     width: 10rem;
-    height: 3rem;
     background-color: #219ebc;
-    border-radius: 1rem;
     color: white;
     font-size: 1.2rem;
-    cursor: pointer;
-    user-select: none;
 }
 
 main
-.filters-container {
+.dropdown-container {
     display: flex;
     justify-content: space-between;
     height: 20rem;
     background-color: #219ebc;
 }
 
+main 
+.dropdown-container
+.dropdown-main-section {
+    padding: 2rem;
+}
+
+main 
+.dropdown-container
+.dropdown-main-section
+h2 {
+    padding: 1.5rem 0;
+    color: #f0f0f0;
+}
+
+main 
+.dropdown-container
+.dropdown-main-section
+.dropdown-lists-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+main 
+.dropdown-container
+.dropdown-main-section
+.dropdown-lists-container
+.btn {
+    gap: 7rem;
+}
+
 main
-.filters-container
-.filters-main-image {
+.dropdown-container
+.dropdown-image {
     height: 100%;
     width: 50%;
 }
