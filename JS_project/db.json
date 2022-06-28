@@ -1,19 +1,202 @@
 {
-  "posts": [
+  "cars": [ 
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "mitsubishi": [
+        {
+          "model": "Lancer",
+          "year": 2008,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Outlander",
+          "year": 2015,
+          "color": "blue"
+        },
+        {
+          "model": "Lancer",
+          "year": 2005,
+          "color": "red"
+        },
+        {
+          "model": "Outlander",
+          "year": 2015,
+          "color": "white"
+        },
+        {
+          "model": "ASX",
+          "year": 2012,
+          "color": "red"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "Lancer",
+          "year": 2002,
+          "color": "black"
+        },
+        {
+          "model": "ASX",
+          "year": 2005,
+          "color": "blue"
+        }
+      ],
+      "toyota": [
+        {
+          "model": "Corolla",
+          "year": 2008,
+          "color": "grey"
+        },
+        {
+          "model": "RAV4",
+          "year": 2015,
+          "color": "black"
+        },
+        {
+          "model": "RAV4",
+          "year": 2015,
+          "color": "black"
+        },
+        {
+          "model": "RAV4",
+          "year": 2015,
+          "color": "black"
+        },
+        {
+          "model": "RAV4",
+          "year": 2015,
+          "color": "black"
+        },
+        {
+          "model": "RAV4",
+          "year": 2015,
+          "color": "black"
+        },
+        {
+          "model": "RAV4",
+          "year": 2015,
+          "color": "black"
+        },
+        {
+          "model": "RAV4",
+          "year": 2015,
+          "color": "black"
+        },
+        {
+          "model": "RAV4",
+          "year": 2015,
+          "color": "black"
+        },
+        {
+          "model": "Corolla",
+          "year": 2014,
+          "color": "grey"
+        },
+        {
+          "model": "Corolla",
+          "year": 2014,
+          "color": "black"
+        },
+        {
+          "model": "Corolla",
+          "year": 2008,
+          "color": "red"
+        },
+        {
+          "model": "Corolla",
+          "year": 2008,
+          "color": "grey"
+        }
+      ],
+      "lexus": [
+        {
+          "model": "LS",
+          "year": 2019,
+          "color": "black"
+        },
+        {
+          "model": "LS",
+          "year": 2020,
+          "color": "black"
+        },
+        {
+          "model": "ES",
+          "year": 2014,
+          "color": "white"
+        },
+        {
+          "model": "ES",
+          "year": 2014,
+          "color": "white"
+        },
+        {
+          "model": "ES",
+          "year": 2014,
+          "color": "white"
+        },
+        {
+          "model": "ES",
+          "year": 2014,
+          "color": "white"
+        },
+        {
+          "model": "ES",
+          "year": 2014,
+          "color": "white"
+        },
+        {
+          "model": "ES",
+          "year": 2014,
+          "color": "white"
+        },
+        {
+          "model": "ES",
+          "year": 2014,
+          "color": "white"
+        }
+      ]
     }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
