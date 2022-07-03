@@ -8,7 +8,20 @@ body {
     font-family: 'Anek Malayalam', sans-serif;
 }
 
+ul {
+    list-style-type: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.shown {
+    display: flex;
+}
+
 .btn {
+    position: relative;
     width: 20rem;
     display: flex;
     align-items: center;
@@ -57,7 +70,7 @@ h1
 }
 
 main
-.dropdown-container {
+.filters-container {
     display: flex;
     justify-content: space-between;
     height: 20rem;
@@ -65,22 +78,22 @@ main
 }
 
 main 
-.dropdown-container
-.dropdown-main-section {
+.filters-container
+.filters-main-section{
     padding: 2rem;
 }
 
 main 
-.dropdown-container
-.dropdown-main-section
+.filters-container
+.filters-main-section
 h2 {
     padding: 1.5rem 0;
     color: #f0f0f0;
 }
 
 main 
-.dropdown-container
-.dropdown-main-section
+.filters-container
+.filters-main-section
 .dropdown-lists-container {
     display: flex;
     flex-direction: column;
@@ -88,15 +101,66 @@ main
 }
 
 main 
-.dropdown-container
-.dropdown-main-section
+.filters-container
+.filters-main-section
+.dropdown-lists-container
+li
+.dropdown-content {
+    position: absolute;
+    bottom: 0;
+}
+
+main 
+.filters-container
+.filters-main-section
 .dropdown-lists-container
 .btn {
     gap: 7rem;
 }
 
+main 
+.filters-container
+.filters-main-section
+.dropdown-lists-container
+.btn
+.dropdown-content {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 110%;
+    top: 0;
+    gap: 1rem;
+}
+
+main 
+.filters-container
+.filters-main-section
+.dropdown-lists-container
+.btn
+.dropdown-content
+li {
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    background-color: #f0f0f0;
+    text-align: center;
+    border-radius: 1rem;
+    width: 5rem;
+}
+
+main 
+.filters-container
+.filters-main-section
+.dropdown-lists-container
+.btn
+.dropdown-content
+li:hover {
+    background-color: #dadada;
+}
+
 main
-.dropdown-container
+.filters-container
 .dropdown-image {
     height: 100%;
     width: 50%;

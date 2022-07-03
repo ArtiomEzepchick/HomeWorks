@@ -28,18 +28,30 @@
     </header>
 
     <main>
-        <div class="dropdown-container">
-            <div class="dropdown-main-section">
+        <div class="filters-container">
+            <div class="filters-main-section">
                 <h2>Find Your Car In Phew Steps:</h2>
-                <div class="dropdown-lists-container">
-                    <div class="btn dropdown-btn make-btn">Choose a make...<i class="fa-solid fa-angle-down"></i></div>
-                    <ul id="dropdown-make-list" class="dropdown-content"></ul>
-                    <div class="btn dropdown-btn model-btn">Choose a model...<i class="fa-solid fa-angle-down"></i></div>
-                    <ul id="dropdwn-model-list" class="dropdown-content"></ul>
-                    <div class="btn dropdown-btn year-btn">Choose a year...<i class="fa-solid fa-angle-down"></i></div>
-                    <ul id="dropdwn-year-list" class="dropdown-content"></ul>
-                    <div class="btn result-btn"></div>
-                  </div>
+                <ul class="dropdown-lists-container">
+                    <li id="make-btn" class="btn dropdown-btn">
+                        <span>Choose a make...</span><i class="fa-solid fa-arrow-right"></i>
+                        <ul id="dropdown-make-list" class="dropdown-content hidden">
+
+                        </ul>
+                    </li>
+                    <li id="model-btn" class="btn dropdown-btn">
+                        <span>Choose a model...</span><i class="fa-solid fa-arrow-right"></i>
+                        <ul id="dropdwn-model-list" class="dropdown-content hidden">
+
+                        </ul>
+                    </li>
+                    <li id="year-btn" class="btn dropdown-btn">
+                    <span>Choose a year...</span><i class="fa-solid fa-arrow-right"></i>
+                        <ul id="dropdwn-year-list" class="dropdown-content hidden">
+
+                        </ul>
+                    </li>
+                    <li class="btn result-btn"></li>
+                </ul>
             </div>
             <img class="dropdown-image" src="./assets/images/road-view.jpeg" alt="Road view">
         </div>

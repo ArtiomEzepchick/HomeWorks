@@ -1,202 +1,268 @@
 {
   "cars": [ 
     {
-      "mitsubishi": [
-        {
-          "model": "Lancer",
-          "year": 2008,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Outlander",
-          "year": 2015,
-          "color": "blue"
-        },
-        {
-          "model": "Lancer",
-          "year": 2005,
-          "color": "red"
-        },
-        {
-          "model": "Outlander",
-          "year": 2015,
-          "color": "white"
-        },
-        {
-          "model": "ASX",
-          "year": 2012,
-          "color": "red"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "Lancer",
-          "year": 2002,
-          "color": "black"
-        },
-        {
-          "model": "ASX",
-          "year": 2005,
-          "color": "blue"
-        }
-      ],
-      "toyota": [
-        {
-          "model": "Corolla",
-          "year": 2008,
-          "color": "grey"
-        },
-        {
-          "model": "RAV4",
-          "year": 2015,
-          "color": "black"
-        },
-        {
-          "model": "RAV4",
-          "year": 2015,
-          "color": "black"
-        },
-        {
-          "model": "RAV4",
-          "year": 2015,
-          "color": "black"
-        },
-        {
-          "model": "RAV4",
-          "year": 2015,
-          "color": "black"
-        },
-        {
-          "model": "RAV4",
-          "year": 2015,
-          "color": "black"
-        },
-        {
-          "model": "RAV4",
-          "year": 2015,
-          "color": "black"
-        },
-        {
-          "model": "RAV4",
-          "year": 2015,
-          "color": "black"
-        },
-        {
-          "model": "RAV4",
-          "year": 2015,
-          "color": "black"
-        },
-        {
-          "model": "Corolla",
-          "year": 2014,
-          "color": "grey"
-        },
-        {
-          "model": "Corolla",
-          "year": 2014,
-          "color": "black"
-        },
-        {
-          "model": "Corolla",
-          "year": 2008,
-          "color": "red"
-        },
-        {
-          "model": "Corolla",
-          "year": 2008,
-          "color": "grey"
-        }
-      ],
-      "lexus": [
-        {
-          "model": "LS",
-          "year": 2019,
-          "color": "black"
-        },
-        {
-          "model": "LS",
-          "year": 2020,
-          "color": "black"
-        },
-        {
-          "model": "ES",
-          "year": 2014,
-          "color": "white"
-        },
-        {
-          "model": "ES",
-          "year": 2014,
-          "color": "white"
-        },
-        {
-          "model": "ES",
-          "year": 2014,
-          "color": "white"
-        },
-        {
-          "model": "ES",
-          "year": 2014,
-          "color": "white"
-        },
-        {
-          "model": "ES",
-          "year": 2014,
-          "color": "white"
-        },
-        {
-          "model": "ES",
-          "year": 2014,
-          "color": "white"
-        },
-        {
-          "model": "ES",
-          "year": 2014,
-          "color": "white"
-        }
-      ]
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2008,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2007,
+      "color": "black"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2005,
+      "color": "black"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "black"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "black"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "blue"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "blue"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2005,
+      "color": "blue"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2008,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2004,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2002,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2012,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2012,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2005,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2009,
+      "color": "white"
+    },
+    {
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "year": 2015,
+      "color": "white"
+    },
+    {
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": 2008,
+      "color": "black"
+    },
+    {
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": 2009,
+      "color": "black"
+    },    
+    {
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": 2008,
+      "color": "grey"
+    },    
+    {
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": 2008,
+      "color": "grey"
+    },
+    {
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "year": 2012,
+      "color": "black"
+    },
+    {
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "year": 2010,
+      "color": "black"
+    },
+    {
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "year": 2012,
+      "color": "black"
+    },
+    {
+      "make": "Nissan",
+      "model": "GT-R",
+      "year": 2016,
+      "color": "black"
+    },
+    {
+      "make": "Nissan",
+      "model": "GT-R",
+      "year": 2016,
+      "color": "black"
+    },
+    {
+      "make": "Nissan",
+      "model": "GT-R",
+      "year": 2015,
+      "color": "grey"
+    },
+    {
+      "make": "Nissan",
+      "model": "GT-R",
+      "year": 2020,
+      "color": "black"
+    },
+    {
+      "make": "Nissan",
+      "model": "GT-R",
+      "year": 2016,
+      "color": "black"
+    },
+    {
+      "make": "Nissan",
+      "model": "Juke",
+      "year": 2016,
+      "color": "blue"
+    },
+    {
+      "make": "Nissan",
+      "model": "Juke",
+      "year": 2016,
+      "color": "blue"
+    },
+    {
+      "make": "Nissan",
+      "model": "Juke",
+      "year": 2016,
+      "color": "blue"
+    },
+    {
+      "make": "Nissan",
+      "model": "Juke",
+      "year": 2016,
+      "color": "blue"
+    },
+    {
+      "make": "Nissan",
+      "model": "Juke",
+      "year": 2016,
+      "color": "black"
     }
   ]
 }
