@@ -1,8 +1,8 @@
 import './styles/styles.css'
 
-const allDropdownBtns = document.querySelectorAll('.dropdown-btn')
 const li = document.createElement('li')
 const dropDownListsContainer = document.querySelector('.dropdown-lists-container')
+const dropdownContent = document.querySelector('.dropdown-content')
 const makeBtn = document.getElementById('make-btn')
 const modelBtn = document.getElementById('model-btn')
 const yearBtn = document.getElementById('year-btn')
@@ -12,28 +12,58 @@ const yearList = document.getElementById('dropdown-year-list')
 const resultBtn = document.querySelector('.result-btn')
 const carsUrl = 'http://localhost:3000/cars'
 
-makeList.classList.add('hidden')
+const arrayAppendToList = (array, list) => {
+    for (let i = 0; i < array.length; i++) {
+        list.append(li.cloneNode(true))
+    }
+
+    for (let i = 0, li; i < list.children.length; i++) {
+        li = list.children[i]
+        li.classList.add('inner-text')
+        li.append(array[i])
+    }
+
+    return array
+}
 
 const resultBtnInnerText = fetch(carsUrl)
 .then((response) => response.json())
 .then(data => {
         const carsCount = data.length
-        let makeBrandsArray = []
+        let aMakeArray = []
+        let modelsArray = []
+        let yearsArray = []
 
         for (let item of data) {
-            if (!makeBrandsArray.includes(item.make)) {
-                makeBrandsArray.push(item.make)
+            if (!aMakeArray.includes(item.make)) {
+                aMakeArray.push(item.make)
+            }
+
+            if (!modelsArray.includes(item.model)) {
+                modelsArray.push(item.model)
+            }
+
+            if (!yearsArray.includes(item.year)) {
+                yearsArray.push(item.year)
             }
         }
 
-        for (let i = 0; i < makeBrandsArray.length; i++) {
-            makeList.append(li.cloneNode(true))
+        const sortedYearsArray = yearsArray.sort((a,b) => a - b)
+
+        arrayAppendToList(aMakeArray, makeList)
+        arrayAppendToList(modelsArray, modelList)
+        arrayAppendToList(sortedYearsArray, yearList)
+
+        for (let item of aMakeArray) {
+            if (makeBtn.firstChild.textContent.trim() !== item) {
+                modelBtn.classList.add('btn-background-grey')
+            }
         }
 
-        for (let i = 0, li; i < makeList.children.length; i++) {
-            li = makeList.children[i]
-            li.classList.add('hidden')
-            li.append(makeBrandsArray[i])
+        for (let item of modelsArray) {
+            if (modelBtn.firstChild.textContent.trim() !== item) {
+                yearBtn.classList.add('btn-background-grey')
+            }
         }
         
         if (!carsCount) {
@@ -43,30 +73,21 @@ const resultBtnInnerText = fetch(carsUrl)
         return resultBtn.innerHTML  = `<span>View <span class='color-aqua'>${carsCount}</span> available ads</span>`
 })
 
+const btnTargetClassesToggle = (btn, list, target) => {
+    if (target === btn) {
+        return list.classList.toggle('shown')
+    }
+}
+
 dropDownListsContainer.addEventListener('click', event => {
-    const target = event.target;
-    if (target === makeBtn) {
-        for (let elem of makeList.children) {
-            elem.classList.toggle('shown')
-        }
-    }
+    const target = event.target
 
-    if (target === modelBtn) {
-        for (let elem of modelBtn.children) {
-            elem.classList.toggle('shown')
-        }
-    }
+    btnTargetClassesToggle(makeBtn, makeList, target)
+    btnTargetClassesToggle(modelBtn, modelList, target)
+    btnTargetClassesToggle(yearBtn, yearList, target)
 
-    if (target === yearBtn) {
-        for (let elem of yearList.children) {
-            elem.classList.toggle('shown')
-        }
+    if (target.className === 'inner-text') {
+        target.closest('.btn').firstChild.textContent = target.textContent
+        target.closest('.dropdown-content').classList.toggle('shown')
     }
-    
 })
-
-console.log(makeList.children)
-
-
-        
-
