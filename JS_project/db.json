@@ -14,7 +14,7 @@
     },
     {
       "make": "Mitsubishi",
-      "model": "Lancer",
+      "model": "ASX",
       "year": 2007,
       "color": "black"
     },
@@ -26,7 +26,7 @@
     },
     {
       "make": "Mitsubishi",
-      "model": "Lancer",
+      "model": "ASX",
       "year": 2005,
       "color": "black"
     },
@@ -38,7 +38,7 @@
     },
     {
       "make": "Mitsubishi",
-      "model": "Lancer",
+      "model": "Carisma",
       "year": 2005,
       "color": "blue"
     },
@@ -80,8 +80,8 @@
     },
     {
       "make": "Mitsubishi",
-      "model": "Lancer",
-      "year": 2005,
+      "model": "Carisma",
+      "year": 2007,
       "color": "white"
     },
     {
@@ -182,7 +182,7 @@
     },    
     {
       "make": "Toyota",
-      "model": "Corolla",
+      "model": "RAV-4",
       "year": 2008,
       "color": "grey"
     },
@@ -200,8 +200,8 @@
     },
     {
       "make": "Toyota",
-      "model": "Land Cruiser",
-      "year": 2012,
+      "model": "RAV-4",
+      "year": 2017,
       "color": "black"
     },
     {
@@ -224,14 +224,14 @@
     },
     {
       "make": "Nissan",
-      "model": "GT-R",
-      "year": 2020,
+      "model": "350Z",
+      "year": 2005,
       "color": "black"
     },
     {
       "make": "Nissan",
-      "model": "GT-R",
-      "year": 2016,
+      "model": "350Z",
+      "year": 2007,
       "color": "black"
     },
     {
