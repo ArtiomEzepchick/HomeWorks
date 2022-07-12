@@ -1,7 +1,6 @@
 import './styles/styles.css'
 
 const li = document.createElement('li')
-const yearMessage = document.querySelector('.year-message')
 const dropDownListsContainer = document.querySelector('.dropdown-lists-container')
 const makeBtn = document.getElementById('make-btn')
 const modelBtn = document.getElementById('model-btn')
@@ -10,8 +9,12 @@ const makeList = document.getElementById('dropdown-make-list')
 const modelList = document.getElementById('dropdown-model-list')
 const yearList = document.getElementById('dropdown-year-list')
 const resultBtn = document.getElementById('result-btn')
+const resetBtn = document.getElementById('reset-btn')
 const carsUrl = 'http://localhost:3000/cars'
 const carsServerResponseParsed = fetch(carsUrl).then((response) => response.json())
+const makeBtnOriginTextContent = makeBtn.firstChild.textContent
+const modelBtnOriginTextContent = modelBtn.firstChild.textContent
+const yearBtnOriginTextContent = yearBtn.firstChild.textContent
 let temporaryCount = 0;
 
 const arrayAppendToList = (array, list) => {
@@ -40,15 +43,16 @@ const btnInnerTextChange = (btn, list, event) => {
         if (btn === makeBtn) {
             modelBtn.classList.remove('background-grey')
 
-            if (modelBtn.firstChild.textContent !== 'Choose a model...') {
-                modelBtn.firstChild.textContent = 'Choose a model...'
+            if (modelBtn.firstChild.textContent !== modelBtnOriginTextContent) {
+                modelBtn.firstChild.textContent = modelBtnOriginTextContent
+                yearBtn.firstChild.textContent = yearBtnOriginTextContent
                 yearBtn.classList.add('background-grey')
             }
         }
 
         if (btn === modelBtn) {
             yearBtn.classList.remove('background-grey')
-            yearBtn.firstChild.textContent = 'Choose a year...'
+            yearBtn.firstChild.textContent = yearBtnOriginTextContent
         }
     }
 }
@@ -101,7 +105,7 @@ makeBtn.addEventListener('click', event => {
             }
         }
 
-        if (modelBtn.firstChild.textContent !== 'Choose a model...') {
+        if (modelBtn.firstChild.textContent !== modelBtnOriginTextContent) {
             count = temporaryCount
         }
 
@@ -153,12 +157,14 @@ modelBtn.addEventListener('click', event => {
             }
         }
 
-        if (count !== 0) {
-            resultBtn.innerHTML = `View <b class = 'color-aqua'>${count}</b> ads`
-        } 
-
-        if (yearBtn.firstChild.textContent.trim() !== 'Choose a year...') {
-            resultBtn.innerHTML = `View <b class = 'color-aqua'>${temporaryCount}</b> ads`
+        if (!modelBtn.classList.contains('background-grey')) {
+            if (count !== 0) {
+                resultBtn.innerHTML = `View <b class = 'color-aqua'>${count}</b> ads`
+            } 
+    
+            if (yearBtn.firstChild.textContent !== yearBtnOriginTextContent) {
+                resultBtn.innerHTML = `View <b class = 'color-aqua'>${temporaryCount}</b> ads`
+            }
         }
     })
 })
@@ -215,6 +221,25 @@ yearBtn.addEventListener('click', event => {
     })
 })
 
+resultBtn.addEventListener('click', (event) => {
+    event.preventDefault()
+})
+
+resetBtn.addEventListener('click', (event) => {
+    const target = event.target
+    event.preventDefault()
+    
+    if (target === resetBtn) {
+        makeBtn.firstChild.textContent = makeBtnOriginTextContent
+        modelBtn.firstChild.textContent = modelBtnOriginTextContent
+        yearBtn.firstChild.textContent = yearBtnOriginTextContent
+        modelBtn.classList.add('background-grey')
+        yearBtn.classList.add('background-grey')
+        resetBtn.classList.remove('shown')
+        carsServerResponseParsed.then(data => resultBtn.innerHTML = `View <b class = 'color-aqua'>${data.length}</b> ads`)
+    }
+})
+
 window.addEventListener('click', event => {
     const target = event.target
     const modelMessage = document.querySelector('.model-message')
@@ -232,5 +257,9 @@ window.addEventListener('click', event => {
         if (yearBtn.contains(yearMessage)) {
             yearBtn.removeChild(yearMessage)
         }
+    }
+
+    if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent) {
+        resetBtn.classList.add('shown')
     }
 })

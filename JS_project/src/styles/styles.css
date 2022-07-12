@@ -5,6 +5,7 @@
 }
 
 body,
+#reset-btn, 
 #result-btn {
     font-family: 'Anek Malayalam', sans-serif;
 }
@@ -32,6 +33,7 @@ ul {
     border-radius: 1rem;
     cursor: pointer;
     user-select: none;
+    border: none;
 }
 
 .btn-alert-message {
@@ -184,9 +186,23 @@ main
 main 
 .filters-container
 .filters-main-section
+#reset-btn {
+    position: absolute;
+    border: 1px solid black;
+    height: 2rem;
+    width: 10rem;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3rem;
+    font-size: 1rem;
+}
+
+main 
+.filters-container
+.filters-main-section
 #result-btn {
     display: block;
-    border: none;
     position: absolute;
     bottom: 5%;
     left: 50%;
