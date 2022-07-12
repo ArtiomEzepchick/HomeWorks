@@ -1,4 +1,7 @@
 import './styles/styles.css'
+import './styles/header.css'
+import './styles/main.css'
+import './styles/footer.css'
 
 const li = document.createElement('li')
 const dropDownListsContainer = document.querySelector('.dropdown-lists-container')
@@ -10,11 +13,11 @@ const modelList = document.getElementById('dropdown-model-list')
 const yearList = document.getElementById('dropdown-year-list')
 const resultBtn = document.getElementById('result-btn')
 const resetBtn = document.getElementById('reset-btn')
-const carsUrl = 'http://localhost:3000/cars'
-const carsServerResponseParsed = fetch(carsUrl).then((response) => response.json())
 const makeBtnOriginTextContent = makeBtn.firstChild.textContent
 const modelBtnOriginTextContent = modelBtn.firstChild.textContent
 const yearBtnOriginTextContent = yearBtn.firstChild.textContent
+const carsUrl = 'http://localhost:3000/cars'
+const carsServerResponseParsed = fetch(carsUrl).then((response) => response.json())
 let temporaryCount = 0;
 
 const arrayAppendToList = (array, list) => {
@@ -226,8 +229,8 @@ resultBtn.addEventListener('click', (event) => {
 })
 
 resetBtn.addEventListener('click', (event) => {
-    const target = event.target
     event.preventDefault()
+    const target = event.target
     
     if (target === resetBtn) {
         makeBtn.firstChild.textContent = makeBtnOriginTextContent
