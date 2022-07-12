@@ -18,7 +18,7 @@ ul {
 }
 
 .shown {
-    display: flex;
+    display: block;
 }
 
 .btn {
@@ -34,9 +34,16 @@ ul {
     user-select: none;
 }
 
-.background-grey-disabled {
+.btn-alert-message {
+    position: absolute;
+    top: -80%;
+    left: 10%;
+    font-size: 0.8rem;
+}
+
+.background-grey {
     background-color: #b3b3b3;
-    pointer-events: none;
+    cursor: auto;
 }
 
 .color-aqua {
@@ -113,30 +120,8 @@ main
 .filters-container
 .filters-main-section
 .dropdown-lists-container
-li
-.dropdown-content {
-    position: absolute;
-    bottom: 0;
-}
-
-main 
-.filters-container
-.filters-main-section
-.dropdown-lists-container
 .btn {
     gap: 7rem;
-}
-
-main 
-.filters-container
-.filters-main-section
-.dropdown-lists-container
-.btn:after {
-    position: absolute;
-    width: 10rem;
-    height: 3rem;
-    left: 0;
-    background-color: red;
 }
 
 main 
@@ -153,18 +138,21 @@ main
 .filters-main-section
 .dropdown-lists-container
 .btn
-.dropdown-content {
+.dropdown-list {
+    width: 100%;
+    background: gray;
+    padding: 0;
+    margin: 10px 0 0;
+    list-style: none;
+    max-height: 10rem;
+    overflow: hidden auto;
     position: absolute;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     top: 200%;
-    gap: 1rem;
-    width: 100%;
-    height: 10rem;
     background-color: #f0f0f0;
     border-radius: 1rem;
-    overflow: auto;
 }
 
 main 
@@ -172,20 +160,11 @@ main
 .filters-main-section
 .dropdown-lists-container
 .btn
-#dropdown-model-list {
-    padding-top: 4rem;
-}
-
-main 
-.filters-container
-.filters-main-section
-.dropdown-lists-container
-.btn
-.dropdown-content
-li {
+.dropdown-list
+.dropdown-content {
+    display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     width: 100%;
     height: 3rem;
 }
@@ -195,8 +174,8 @@ main
 .filters-main-section
 .dropdown-lists-container
 .btn
-.dropdown-content
-li:hover {
+.dropdown-list
+.dropdown-content:hover {
     width: 100%;
     background-color: #dadada;
     border-radius: 1rem;
@@ -206,6 +185,7 @@ main
 .filters-container
 .filters-main-section
 #result-btn {
+    display: block;
     border: none;
     position: absolute;
     bottom: 5%;
