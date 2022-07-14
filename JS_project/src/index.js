@@ -30,14 +30,18 @@ const arrayAppendToList = (array, list) => {
         li.classList.add('dropdown-content')
         li.append(array[i])
     }
-
     return array
 }
 
 const btnInnerTextChange = (btn, list, event) => {
     const target = event.target
-    
-    list.classList.toggle('shown')
+
+    if (target.tagName === 'I') {
+        list.classList.toggle('active')
+        console.log('okay')
+    }
+
+    list.classList.toggle('active')
 
     if (target.className === 'dropdown-content') {
         btn.firstChild.textContent = ''
@@ -58,6 +62,7 @@ const btnInnerTextChange = (btn, list, event) => {
             yearBtn.firstChild.textContent = yearBtnOriginTextContent
         }
     }
+    return
 }
 
 const btnDropdownBarsAppend = (typeOfData, list) => {
@@ -72,22 +77,36 @@ const btnDropdownBarsAppend = (typeOfData, list) => {
 
         arrayAppendToList(array, list)
     })
-}
-
-const aMakeBtnDropdownBars = () => {
-    btnDropdownBarsAppend('make', makeList)
+    return
 }
 
 const btnGetInnerText = (btn) => btn.firstChild.textContent.toLowerCase().slice(0, -3)
 
-const removeBtnClassShown = (btn, list, target) => {
+const removeBtnClassActive = (btn, list, target) => {
     if (target !== btn && target !== list) {
-        list.classList.remove('shown')
+        list.classList.remove('active')
     }
+    return
 }
 
 document.addEventListener('DOMContentLoaded', () => carsServerResponseParsed
 .then(data => resultBtn.innerHTML = `View <b class = 'color-aqua'>${data.length}</b> ads`))
+
+const backgroundClrGreyClassAdd = (btn, event) => {
+    const target = event.target
+    if (target === btn) {
+        btn.classList.add('background-light-grey')
+    }
+    return
+} 
+
+const backgroundClrGreyClassRemove = (btn, event) => {
+    const target = event.target
+    if (target === btn) {
+        btn.classList.remove('background-light-grey')
+    }
+    return
+} 
 
 makeBtn.addEventListener('click', event => {
     let count = 0
@@ -96,7 +115,7 @@ makeBtn.addEventListener('click', event => {
         makeList.innerHTML = ''
     }
 
-    aMakeBtnDropdownBars()
+    btnDropdownBarsAppend('make', makeList)
     btnInnerTextChange(makeBtn, makeList, event)
 
     carsServerResponseParsed.then(data => {
@@ -116,6 +135,14 @@ makeBtn.addEventListener('click', event => {
             resultBtn.innerHTML = `View <b class = 'color-aqua'>${count}</b> ads`
         } 
     })
+})
+
+makeBtn.addEventListener('mouseover', event => {
+    backgroundClrGreyClassAdd(makeBtn, event)
+})
+
+makeBtn.addEventListener('mouseout', event => {
+    backgroundClrGreyClassRemove(makeBtn, event)
 })
 
 modelBtn.addEventListener('click', event => {
@@ -172,6 +199,18 @@ modelBtn.addEventListener('click', event => {
     })
 })
 
+modelBtn.addEventListener('mouseover', event => {
+    if (!modelBtn.classList.contains('background-grey')) {
+        backgroundClrGreyClassAdd(modelBtn, event)
+    }
+})
+
+modelBtn.addEventListener('mouseout', event => {
+    if (!modelBtn.classList.contains('background-grey')) {
+        backgroundClrGreyClassRemove(modelBtn, event)
+    }
+})
+
 yearBtn.addEventListener('click', event => {
     const target = event.target
     const div = document.createElement('div')
@@ -224,6 +263,18 @@ yearBtn.addEventListener('click', event => {
     })
 })
 
+yearBtn.addEventListener('mouseover', event => {
+    if (!yearBtn.classList.contains('background-grey')) {
+        backgroundClrGreyClassAdd(yearBtn, event)
+    }
+})
+
+yearBtn.addEventListener('mouseout', event => {
+    if (!yearBtn.classList.contains('background-grey')) {
+        backgroundClrGreyClassRemove(yearBtn, event)
+    }
+})
+
 resultBtn.addEventListener('click', (event) => {
     event.preventDefault()
 })
@@ -238,7 +289,7 @@ resetBtn.addEventListener('click', (event) => {
         yearBtn.firstChild.textContent = yearBtnOriginTextContent
         modelBtn.classList.add('background-grey')
         yearBtn.classList.add('background-grey')
-        resetBtn.classList.remove('shown')
+        resetBtn.classList.remove('active')
         carsServerResponseParsed.then(data => resultBtn.innerHTML = `View <b class = 'color-aqua'>${data.length}</b> ads`)
     }
 })
@@ -248,9 +299,9 @@ window.addEventListener('click', event => {
     const modelMessage = document.querySelector('.model-message')
     const yearMessage = document.querySelector('.year-message')
 
-    removeBtnClassShown(makeBtn, makeList, target)
-    removeBtnClassShown(modelBtn, modelList, target)
-    removeBtnClassShown(yearBtn, yearList, target)
+    removeBtnClassActive(makeBtn, makeList, target)
+    removeBtnClassActive(modelBtn, modelList, target)
+    removeBtnClassActive(yearBtn, yearList, target)
 
     if (target !== modelBtn && target !== yearBtn) {
         if (modelBtn.contains(modelMessage)) {
@@ -263,6 +314,6 @@ window.addEventListener('click', event => {
     }
 
     if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent) {
-        resetBtn.classList.add('shown')
+        resetBtn.classList.add('active')
     }
 })

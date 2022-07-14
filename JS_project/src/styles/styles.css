@@ -18,22 +18,28 @@ ul {
     display: none;
 }
 
-.shown {
+.active {
     display: block;
 }
 
 .btn {
+    padding: 0 1rem;
     position: relative;
     width: 20rem;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     height: 2rem;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     border-radius: 1rem;
     cursor: pointer;
     user-select: none;
     border: none;
+    transition: all 0.2s ease;
+}
+
+.pointer-events-none {
+    pointer-events: none;
 }
 
 .btn-alert-message {
@@ -45,9 +51,12 @@ ul {
 
 .background-grey {
     background-color: #b3b3b3;
-    cursor: auto;
 }
 
 .color-aqua {
     color: #219ebc;
+}
+
+.background-light-grey {
+    background-color: #dadada;
 }

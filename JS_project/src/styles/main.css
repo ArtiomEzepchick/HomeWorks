@@ -20,7 +20,7 @@ main
 .filters-main-section
 h2 {
     padding: 1.5rem 0;
-    color: #f0f0f0;
+    color: #ffffff;
 }
 
 main 
@@ -36,18 +36,10 @@ main
 .filters-container
 .filters-main-section
 .dropdown-lists-container
-.btn {
-    gap: 7rem;
-}
-
-main 
-.filters-container
-.filters-main-section
-.dropdown-lists-container
 .btn
-span {
-    user-select: none;
-}  
+.fa-solid {
+    margin-left: auto;
+}
 
 main 
 .filters-container
@@ -57,9 +49,6 @@ main
 .dropdown-list {
     width: 100%;
     background: gray;
-    padding: 0;
-    margin: 10px 0 0;
-    list-style: none;
     max-height: 10rem;
     overflow: hidden auto;
     position: absolute;
@@ -67,7 +56,8 @@ main
     align-items: center;
     flex-direction: column;
     top: 200%;
-    background-color: #f0f0f0;
+    left: 0;
+    background-color: #ffffff;
     border-radius: 1rem;
 }
 
@@ -83,6 +73,7 @@ main
     align-items: center;
     width: 100%;
     height: 3rem;
+    transition: all 0.2s ease;
 }
 
 main 
@@ -101,15 +92,25 @@ main
 .filters-container
 .filters-main-section
 #reset-btn {
+    cursor: pointer;
     position: absolute;
-    border: 1px solid black;
+    border: none;
     height: 2rem;
     width: 10rem;
-    top: 10%;
-    left: 50%;
+    bottom: 8%;
+    left: 15%;
+    background-color: #ffffff;
     transform: translateX(-50%);
     border-radius: 3rem;
     font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+main 
+.filters-container
+.filters-main-section
+#reset-btn:hover {
+    background-color: #dadada;
 }
 
 main 
@@ -124,4 +125,11 @@ main
     height: 4rem;
     border-radius: 3rem;
     font-size: 1.2rem;
+}
+
+main 
+.filters-container
+.filters-main-section
+#result-btn:hover {
+    background-color: #dadada;
 }
