@@ -4,7 +4,10 @@ import './styles/main.css'
 import './styles/footer.css'
 
 const li = document.createElement('li')
-const dropDownListsContainer = document.querySelector('.dropdown-lists-container')
+const figure = document.createElement('figure')
+const img = document.createElement('img')
+const scrollTopBtn = document.getElementById('scroll-top-btn')
+const adsContainer = document.querySelector('.ads-container')
 const makeBtn = document.getElementById('make-btn')
 const modelBtn = document.getElementById('model-btn')
 const yearBtn = document.getElementById('year-btn')
@@ -82,6 +85,12 @@ const btnDropdownBarsAppend = (typeOfData, list) => {
 
 const btnGetInnerText = (btn) => btn.firstChild.textContent.toLowerCase().slice(0, -3)
 
+const firstLetterToUpperCase = str => {
+    if (!str) return str
+  
+    return str[0].toUpperCase() + str.slice(1)
+}
+
 const removeBtnClassActive = (btn, list, target) => {
     if (target !== btn && target !== list) {
         list.classList.remove('active')
@@ -90,7 +99,7 @@ const removeBtnClassActive = (btn, list, target) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => carsServerResponseParsed
-.then(data => resultBtn.innerHTML = `View <b class = 'color-aqua'>${data.length}</b> ads`))
+.then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`))
 
 const backgroundClrGreyClassAdd = (btn, event) => {
     const target = event.target
@@ -106,7 +115,75 @@ const backgroundClrGreyClassRemove = (btn, event) => {
         btn.classList.remove('background-light-grey')
     }
     return
-} 
+}
+
+const addCardImage = (item, make, model) => {
+    const lowerCasedMake = item.make.toLowerCase()
+    const lowerCasedModel = item.model.toLowerCase()
+    
+    if (lowerCasedMake === make.toLowerCase() && lowerCasedModel === model.toLowerCase()) {
+        if (lowerCasedModel.includes(' ')) {
+            const stringReplacedSpace = lowerCasedModel.replace(/ /g, '-')
+            img.classList.add('card-image')
+            img.setAttribute('src', `./assets/images/${stringReplacedSpace}.png`)
+            img.setAttribute('alt', `${lowerCasedModel} model image`)
+            img.setAttribute('title', `${item.model}`)
+            figure.prepend(img.cloneNode(true))
+        } else {
+            img.classList.add('card-image')
+            img.setAttribute('src', `./assets/images/${lowerCasedModel}.png`)
+            img.setAttribute('alt', `${lowerCasedModel} model image`)
+            img.setAttribute('title', `${item.make} ${item.model}`)
+            figure.prepend(img.cloneNode(true))
+        }
+    }
+}
+
+const appendCardsToAdsContainer = (item) => {
+    figure.classList.add('car-card')
+    figure.innerHTML = `
+    <figcaption>
+    <p>Make: <b class='color-aqua'>${item.make}</b></p><hr>
+    <p>Model: ${item.model}</p><hr>
+    <p>Year: ${item.year}</p><hr>
+    <p>Color: ${firstLetterToUpperCase(item.color)}</p>
+    </figcaption>`
+ 
+    addCardImage(item, 'mitsubishi', 'asx')
+    addCardImage(item, 'mitsubishi', 'outlander')
+    addCardImage(item, 'mitsubishi', 'eclipse')
+    addCardImage(item, 'mitsubishi', 'pajero')
+    addCardImage(item, 'toyota', 'rav-4')
+    addCardImage(item, 'toyota', 'land cruiser')
+    addCardImage(item, 'toyota', 'corolla')
+    addCardImage(item, 'nissan', 'murano')
+    addCardImage(item, 'nissan', 'terrano')
+    addCardImage(item, 'nissan', 'qashqai')
+
+    adsContainer.append(figure.cloneNode(true))
+    return
+}
+
+const trackScroll = () => {
+    const scrolled = window.scrollY
+
+    if (scrolled > 500) {
+        scrollTopBtn.classList.add('active')
+    }
+
+    if (scrolled < 500) {
+        scrollTopBtn.classList.remove('active')
+    }
+}
+
+const scrollToTop = () => {
+    if (window.scrollY > 0) {
+        window.scrollTo({ 
+            top: 0,
+            behavior: 'smooth',
+        })
+    }
+}
 
 makeBtn.addEventListener('click', event => {
     let count = 0
@@ -132,8 +209,12 @@ makeBtn.addEventListener('click', event => {
         }
 
         if (count !== 0) {
-            resultBtn.innerHTML = `View <b class = 'color-aqua'>${count}</b> ads`
+            resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${count}</b> ads</span>`
         } 
+
+        if (count === 1) {
+            resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${count}</b> ad</span>`
+        }
     })
 })
 
@@ -189,11 +270,15 @@ modelBtn.addEventListener('click', event => {
 
         if (!modelBtn.classList.contains('background-grey')) {
             if (count !== 0) {
-                resultBtn.innerHTML = `View <b class = 'color-aqua'>${count}</b> ads`
+                resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${count}</b> ads</span>`
             } 
+
+            if (count === 1) {
+                resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${count}</b> ad</span>`
+            }
     
             if (yearBtn.firstChild.textContent !== yearBtnOriginTextContent) {
-                resultBtn.innerHTML = `View <b class = 'color-aqua'>${temporaryCount}</b> ads`
+                resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${temporaryCount}</b> ads</span>`
             }
         }
     })
@@ -256,8 +341,12 @@ yearBtn.addEventListener('click', event => {
         }
 
         if (count !== 0) {
-            resultBtn.innerHTML = `View <b class = 'color-aqua'>${count}</b> ads`
+            resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${count}</b> ads</span>`
         } 
+
+        if (count === 1) {
+            resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${count}</b> ad</span>`
+        }
 
         temporaryCount = count
     })
@@ -275,10 +364,6 @@ yearBtn.addEventListener('mouseout', event => {
     }
 })
 
-resultBtn.addEventListener('click', (event) => {
-    event.preventDefault()
-})
-
 resetBtn.addEventListener('click', (event) => {
     event.preventDefault()
     const target = event.target
@@ -290,7 +375,41 @@ resetBtn.addEventListener('click', (event) => {
         modelBtn.classList.add('background-grey')
         yearBtn.classList.add('background-grey')
         resetBtn.classList.remove('active')
-        carsServerResponseParsed.then(data => resultBtn.innerHTML = `View <b class = 'color-aqua'>${data.length}</b> ads`)
+        adsContainer.classList.remove('active-flex')
+        adsContainer.innerHTML = ''
+        carsServerResponseParsed.then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
+    }
+})
+
+resultBtn.addEventListener('click', (event) => {
+    event.preventDefault()
+    const target = event.target
+    
+    if (target === resultBtn) {
+        adsContainer.classList.remove('active-flex')
+        adsContainer.innerHTML = ''
+        adsContainer.classList.add('active-flex')
+        carsServerResponseParsed.then(data => {
+            for (let item of data) {
+                if (makeBtn.firstChild.textContent === makeBtnOriginTextContent) {
+                    appendCardsToAdsContainer(item)
+                }
+
+                if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent) {
+                    if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === modelBtnOriginTextContent) {
+                        appendCardsToAdsContainer(item)
+                    }
+
+                    if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === item.model && yearBtn.firstChild.textContent === yearBtnOriginTextContent) {
+                        appendCardsToAdsContainer(item)
+                    }
+                }
+
+                if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === item.model && +yearBtn.firstChild.textContent === item.year) {
+                    appendCardsToAdsContainer(item)
+                }
+            }
+        })
     }
 })
 
@@ -313,7 +432,11 @@ window.addEventListener('click', event => {
         }
     }
 
-    if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent) {
+    if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent || target === resultBtn) {
         resetBtn.classList.add('active')
     }
 })
+
+window.addEventListener('scroll', trackScroll)
+
+scrollTopBtn.addEventListener('click', scrollToTop)
