@@ -21,7 +21,8 @@ const modelBtnOriginTextContent = modelBtn.firstChild.textContent
 const yearBtnOriginTextContent = yearBtn.firstChild.textContent
 const carsData = fetch('http://localhost:3000/cars').then((response) => response.json())
 let temporaryCount = 0
-let temporaryArray = []
+let temporaryIdsArray = []
+
 const state = {
     maxScroll: 240,
     count: 3,
@@ -82,8 +83,8 @@ const btnDropdownBarsAppend = (typeOfData, list) => {
             }
         }
 
-        arrayAppendToList(array, list)
-    })
+        arrayAppendToList(array.sort(), list)
+    }).catch(e => console.log(e.message))
 }
 
 const btnGetInnerText = (btn) => btn.firstChild.textContent.toLowerCase().slice(0, -3)
@@ -100,9 +101,6 @@ const removeBtnListClassActive = (btn, list, target) => {
         list.classList.add('hidden')
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => carsData
-.then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`))
 
 const backgroundClrGreyClassAdd = (btn, event) => {
     const target = event.target
@@ -185,6 +183,10 @@ const scrollToTop = () => {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => carsData
+.then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
+.catch(e => console.log(e.message)))
+
 makeBtn.addEventListener('click', event => {
     let count = 0
     
@@ -215,7 +217,7 @@ makeBtn.addEventListener('click', event => {
         if (count === 1) {
             resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${count}</b> ad</span>`
         }
-    })
+    }).catch(e => console.log(e.message))
 })
 
 makeBtn.addEventListener('mouseover', event => {
@@ -257,7 +259,7 @@ modelBtn.addEventListener('click', event => {
             }
         }
 
-        arrayAppendToList(modelsArray, modelList)
+        arrayAppendToList(modelsArray.sort(), modelList)
         btnInnerTextChange(modelBtn, modelList, event)
 
         for (let item of data) {
@@ -281,7 +283,7 @@ modelBtn.addEventListener('click', event => {
                 resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${temporaryCount}</b> ads</span>`
             }
         }
-    })
+    }).catch(e => console.log(e.message))
 })
 
 modelBtn.addEventListener('mouseover', event => {
@@ -349,7 +351,7 @@ yearBtn.addEventListener('click', event => {
         }
 
         temporaryCount = count
-    })
+    }).catch(e => console.log(e.message))
 })
 
 yearBtn.addEventListener('mouseover', event => {
@@ -383,7 +385,10 @@ resetBtn.addEventListener('click', (event) => {
         state.maxScroll = 240
         state.count = 3
         state.previuosCount = 3
-        carsData.then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
+        
+        carsData
+        .then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
+        .catch(e => console.log(e.message))   
     }
 })
 
@@ -397,8 +402,8 @@ resultBtn.addEventListener('click', (event) => {
         adsContainer.classList.add('active-flex')
     }
 
-    if (temporaryArray.length) {
-        temporaryArray = []
+    if (temporaryIdsArray.length) {
+        temporaryIdsArray = []
         state.maxScroll = 240
         state.count = 3
         state.previuosCount = 3
@@ -407,44 +412,42 @@ resultBtn.addEventListener('click', (event) => {
     carsData.then(data => {
         for (let item of data) {
             if (makeBtn.firstChild.textContent === makeBtnOriginTextContent) {
-                temporaryArray.push(item.id)
+                temporaryIdsArray.push(item.id)
             }
 
             if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent) {
                 if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === modelBtnOriginTextContent) {
-                    temporaryArray.push(item.id)
+                    temporaryIdsArray.push(item.id)
                 }
 
                 if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === item.model && yearBtn.firstChild.textContent === yearBtnOriginTextContent) {
-                    temporaryArray.push(item.id)
+                    temporaryIdsArray.push(item.id)
                 }
             }
 
             if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === item.model && +yearBtn.firstChild.textContent === item.year) {
-                temporaryArray.push(item.id)
+                temporaryIdsArray.push(item.id)
             }
         }
 
         for (let item of data) {
-            if (temporaryArray.length < state.count) {
-                for (let num of temporaryArray.slice(0, state.count)) {
+            if (temporaryIdsArray.length < state.count) {
+                for (let num of temporaryIdsArray.slice(0, state.count)) {
                     if (num === item.id) {
-                        console.log('yes, same id')
                         createCarCardAndAppendToAds(item)
                     }
                 }
             }
-            if (temporaryArray.length >= state.count) {
-                for (let num of temporaryArray.slice(0, state.count)) {
+            if (temporaryIdsArray.length >= state.count) {
+                for (let num of temporaryIdsArray.slice(0, state.count)) {
                     if (num === item.id) {
-                        console.log('yes, same id')
                         createCarCardAndAppendToAds(item)
                     }
                 }
             }
         }
         state.count += 3
-    })
+    }).catch(e => console.log(e.message))
 })
 
 window.addEventListener('click', event => {
@@ -476,8 +479,8 @@ window.addEventListener('scroll', () => {
         state.maxScroll += 400
         carsData.then(data => {
             for (let item of data) {
-                if (temporaryArray.length >= state.count) {
-                    for (let num of temporaryArray.slice(state.previuosCount, state.count)) {
+                if (temporaryIdsArray.length >= state.count) {
+                    for (let num of temporaryIdsArray.slice(state.previuosCount, state.count)) {
                         if (num === item.id) {
                             createCarCardAndAppendToAds(item)
                         }
@@ -486,14 +489,14 @@ window.addEventListener('scroll', () => {
             }
             state.previuosCount = state.count
 
-            if (state.count < temporaryArray.length) {
+            if (state.count < temporaryIdsArray.length) {
                 state.count += 3
             }
             
-            if (state.count >= temporaryArray.length) {
-                state.count = temporaryArray.length
+            if (state.count >= temporaryIdsArray.length) {
+                state.count = temporaryIdsArray.length
             }
-        })
+        }).catch(e => e.message)
     }
 })
 
