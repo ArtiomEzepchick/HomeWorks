@@ -19,9 +19,14 @@ const resetBtn = document.getElementById('reset-btn')
 const makeBtnOriginTextContent = makeBtn.firstChild.textContent
 const modelBtnOriginTextContent = modelBtn.firstChild.textContent
 const yearBtnOriginTextContent = yearBtn.firstChild.textContent
-const carsUrl = 'http://localhost:3000/cars'
-const carsServerResponseParsed = fetch(carsUrl).then((response) => response.json())
-let temporaryCount = 0;
+const carsData = fetch('http://localhost:3000/cars').then((response) => response.json())
+let temporaryCount = 0
+let temporaryArray = []
+const state = {
+    maxScroll: 240,
+    count: 3,
+    previuosCount: 3
+}
 
 const arrayAppendToList = (array, list) => {
     for (let i = 0; i < array.length; i++) {
@@ -40,10 +45,10 @@ const btnInnerTextChange = (btn, list, event) => {
     const target = event.target
 
     if (target.tagName === 'I') {
+        list.classList.toggle('hidden')
         list.classList.toggle('active')
-        console.log('okay')
     }
-
+    list.classList.toggle('hidden')
     list.classList.toggle('active')
 
     if (target.className === 'dropdown-content') {
@@ -65,11 +70,10 @@ const btnInnerTextChange = (btn, list, event) => {
             yearBtn.firstChild.textContent = yearBtnOriginTextContent
         }
     }
-    return
 }
 
 const btnDropdownBarsAppend = (typeOfData, list) => {
-    carsServerResponseParsed.then(data => {
+    carsData.then(data => {
         const array = []
 
         for (let item of data) {
@@ -80,7 +84,6 @@ const btnDropdownBarsAppend = (typeOfData, list) => {
 
         arrayAppendToList(array, list)
     })
-    return
 }
 
 const btnGetInnerText = (btn) => btn.firstChild.textContent.toLowerCase().slice(0, -3)
@@ -91,14 +94,14 @@ const firstLetterToUpperCase = str => {
     return str[0].toUpperCase() + str.slice(1)
 }
 
-const removeBtnClassActive = (btn, list, target) => {
+const removeBtnListClassActive = (btn, list, target) => {
     if (target !== btn && target !== list) {
         list.classList.remove('active')
+        list.classList.add('hidden')
     }
-    return
 }
 
-document.addEventListener('DOMContentLoaded', () => carsServerResponseParsed
+document.addEventListener('DOMContentLoaded', () => carsData
 .then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`))
 
 const backgroundClrGreyClassAdd = (btn, event) => {
@@ -106,7 +109,6 @@ const backgroundClrGreyClassAdd = (btn, event) => {
     if (target === btn) {
         btn.classList.add('background-light-grey')
     }
-    return
 } 
 
 const backgroundClrGreyClassRemove = (btn, event) => {
@@ -114,7 +116,6 @@ const backgroundClrGreyClassRemove = (btn, event) => {
     if (target === btn) {
         btn.classList.remove('background-light-grey')
     }
-    return
 }
 
 const addCardImage = (item, make, model) => {
@@ -139,7 +140,7 @@ const addCardImage = (item, make, model) => {
     }
 }
 
-const appendCardsToAdsContainer = (item) => {
+const createCarCardAndAppendToAds = (item) => {
     figure.classList.add('car-card')
     figure.innerHTML = `
     <figcaption>
@@ -161,7 +162,6 @@ const appendCardsToAdsContainer = (item) => {
     addCardImage(item, 'nissan', 'qashqai')
 
     adsContainer.append(figure.cloneNode(true))
-    return
 }
 
 const trackScroll = () => {
@@ -195,7 +195,7 @@ makeBtn.addEventListener('click', event => {
     btnDropdownBarsAppend('make', makeList)
     btnInnerTextChange(makeBtn, makeList, event)
 
-    carsServerResponseParsed.then(data => {
+    carsData.then(data => {
         for (let item of data) {
             if (makeBtn) {
                 if (makeBtn.firstChild.textContent === item.make) {
@@ -245,7 +245,7 @@ modelBtn.addEventListener('click', event => {
         }
     }
     
-    carsServerResponseParsed.then(data => {
+    carsData.then(data => {
         let count = 0
         const modelsArray = []
 
@@ -315,7 +315,7 @@ yearBtn.addEventListener('click', event => {
         }
     }
 
-    carsServerResponseParsed.then(data => {
+    carsData.then(data => {
         let count = 0
         const yearsArray = []
 
@@ -375,9 +375,15 @@ resetBtn.addEventListener('click', (event) => {
         modelBtn.classList.add('background-grey')
         yearBtn.classList.add('background-grey')
         resetBtn.classList.remove('active')
+        makeList.classList.add('hidden')
+        modelList.classList.add('hidden')
+        yearList.classList.add('hidden')
         adsContainer.classList.remove('active-flex')
         adsContainer.innerHTML = ''
-        carsServerResponseParsed.then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
+        state.maxScroll = 240
+        state.count = 3
+        state.previuosCount = 3
+        carsData.then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
     }
 })
 
@@ -389,28 +395,56 @@ resultBtn.addEventListener('click', (event) => {
         adsContainer.classList.remove('active-flex')
         adsContainer.innerHTML = ''
         adsContainer.classList.add('active-flex')
-        carsServerResponseParsed.then(data => {
-            for (let item of data) {
-                if (makeBtn.firstChild.textContent === makeBtnOriginTextContent) {
-                    appendCardsToAdsContainer(item)
+    }
+
+    if (temporaryArray.length) {
+        temporaryArray = []
+        state.maxScroll = 240
+        state.count = 3
+        state.previuosCount = 3
+    }
+
+    carsData.then(data => {
+        for (let item of data) {
+            if (makeBtn.firstChild.textContent === makeBtnOriginTextContent) {
+                temporaryArray.push(item.id)
+            }
+
+            if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent) {
+                if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === modelBtnOriginTextContent) {
+                    temporaryArray.push(item.id)
                 }
 
-                if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent) {
-                    if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === modelBtnOriginTextContent) {
-                        appendCardsToAdsContainer(item)
-                    }
-
-                    if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === item.model && yearBtn.firstChild.textContent === yearBtnOriginTextContent) {
-                        appendCardsToAdsContainer(item)
-                    }
-                }
-
-                if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === item.model && +yearBtn.firstChild.textContent === item.year) {
-                    appendCardsToAdsContainer(item)
+                if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === item.model && yearBtn.firstChild.textContent === yearBtnOriginTextContent) {
+                    temporaryArray.push(item.id)
                 }
             }
-        })
-    }
+
+            if (makeBtn.firstChild.textContent === item.make && modelBtn.firstChild.textContent === item.model && +yearBtn.firstChild.textContent === item.year) {
+                temporaryArray.push(item.id)
+            }
+        }
+
+        for (let item of data) {
+            if (temporaryArray.length < state.count) {
+                for (let num of temporaryArray.slice(0, state.count)) {
+                    if (num === item.id) {
+                        console.log('yes, same id')
+                        createCarCardAndAppendToAds(item)
+                    }
+                }
+            }
+            if (temporaryArray.length >= state.count) {
+                for (let num of temporaryArray.slice(0, state.count)) {
+                    if (num === item.id) {
+                        console.log('yes, same id')
+                        createCarCardAndAppendToAds(item)
+                    }
+                }
+            }
+        }
+        state.count += 3
+    })
 })
 
 window.addEventListener('click', event => {
@@ -418,9 +452,9 @@ window.addEventListener('click', event => {
     const modelMessage = document.querySelector('.model-message')
     const yearMessage = document.querySelector('.year-message')
 
-    removeBtnClassActive(makeBtn, makeList, target)
-    removeBtnClassActive(modelBtn, modelList, target)
-    removeBtnClassActive(yearBtn, yearList, target)
+    removeBtnListClassActive(makeBtn, makeList, target)
+    removeBtnListClassActive(modelBtn, modelList, target)
+    removeBtnListClassActive(yearBtn, yearList, target)
 
     if (target !== modelBtn && target !== yearBtn) {
         if (modelBtn.contains(modelMessage)) {
@@ -434,6 +468,32 @@ window.addEventListener('click', event => {
 
     if (makeBtn.firstChild.textContent !== makeBtnOriginTextContent || target === resultBtn) {
         resetBtn.classList.add('active')
+    }
+})
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > state.maxScroll) {
+        state.maxScroll += 400
+        carsData.then(data => {
+            for (let item of data) {
+                if (temporaryArray.length >= state.count) {
+                    for (let num of temporaryArray.slice(state.previuosCount, state.count)) {
+                        if (num === item.id) {
+                            createCarCardAndAppendToAds(item)
+                        }
+                    }
+                }
+            }
+            state.previuosCount = state.count
+
+            if (state.count < temporaryArray.length) {
+                state.count += 3
+            }
+            
+            if (state.count >= temporaryArray.length) {
+                state.count = temporaryArray.length
+            }
+        })
     }
 })
 
