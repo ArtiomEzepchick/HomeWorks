@@ -310,33 +310,6 @@
     }
   ],
   "users": [
-    {
-      "fname": "Артем",
-      "lname": "Езепчик",
-      "email": "artem.ezepchik@gmail.com",
-      "pass": "258102Aa!",
-      "id": 1
-    },
-    {
-      "fname": "Артем",
-      "lname": "Езепчик",
-      "email": "artem.ezepchik@gmail.com",
-      "pass": "258102Aa!",
-      "id": 2
-    },
-    {
-      "fname": "",
-      "lname": "",
-      "email": "",
-      "pass": "",
-      "id": 3
-    },
-    {
-      "fname": "Артем",
-      "lname": "Езепчик",
-      "email": "artem.ezepchik@gmail.com",
-      "pass": "258102Aa!",
-      "id": 4
-    }
+    
   ]
 }

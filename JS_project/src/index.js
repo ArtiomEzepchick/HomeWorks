@@ -9,6 +9,7 @@ const img = document.createElement('img')
 const body = document.querySelector('body')
 const modalContainer = document.querySelector('.modal-container')
 const registerForm = document.getElementById('register-form')
+const loginBtn = document.getElementById('login-btn')
 const registerBtn = document.getElementById('register-btn')
 const modalCloseBtn = document.querySelector('.close-modal-btn')
 const clearBtn = document.getElementById('clearBtn')
@@ -28,6 +29,7 @@ const makeBtnOriginTextContent = makeBtn.firstChild.textContent
 const modelBtnOriginTextContent = modelBtn.firstChild.textContent
 const yearBtnOriginTextContent = yearBtn.firstChild.textContent
 const carsData = fetch('http://localhost:3000/cars').then(response => response.json()).catch(e => console.log(e))
+const usersData = fetch('http://localhost:3000/users').then(response => response.json()).catch(e => console.log(e))
 let temporaryCount = 0
 let temporaryIdsArray = []
 const errorsContainer = {}
@@ -238,10 +240,11 @@ const clearForm = () => {
     termsCheckbox.checked = ''
 }
 
-function destructureForm(formNode) {
+function destructureForm(form) {
     const obj = {}
-    const { elements } = formNode
-    const data = Array.from(elements)
+    const { elements } = form
+
+    Array.from(elements)
         .filter((item) => !!item.name && item !== termsCheckbox)
         .map(item => {
             const { name, value } = item
@@ -252,9 +255,9 @@ function destructureForm(formNode) {
 
 async function sendFormData(data) {
     return await fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
     })
 }
 
@@ -264,9 +267,19 @@ async function formSubmit() {
     return response
 }
 
-document.addEventListener('DOMContentLoaded', () => carsData
-.then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
-.catch(e => console.log(e.message)))
+document.addEventListener('DOMContentLoaded', () => {
+    carsData
+    .then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
+    .catch(e => console.log(e.message))
+
+    usersData
+    .then(data => {
+        if (data.length) {
+            loginBtn.classList.remove('hidden')
+            loginBtn.classList.add('active')
+        }
+    })
+})
 
 for (let input of inputs) {
     input.addEventListener('focus', () => {
@@ -338,6 +351,40 @@ modalCloseBtn.addEventListener('click', () => {
     modalContainer.classList.remove('active-flex')
     modalContainer.classList.add('hidden')
     clearForm()
+})
+
+registerForm.addEventListener('submit', event => {
+    event.preventDefault()
+    const checkLengthOfErrorsContainer = Object.entries(errorsContainer).length
+
+    for (let input of inputs) {
+        if (!input.value && input.type !== 'checkbox') {
+            createError(input, 'is empty')
+        }
+    }
+
+    if (termsCheckbox.checked) {
+        if (!checkLengthOfErrorsContainer) {
+            formSubmit()
+            alert('Submitted!')
+            alert('Thanks for registration!')
+            modalContainer.classList.remove('active-flex')
+            modalContainer.classList.add('hidden')
+            loginBtn.classList.remove('hidden')
+            loginBtn.classList.add('active')
+            clearForm()
+        } else {
+            alert("Can't submit: you have some problems, please check red inputs")
+        }
+    } else {
+        alert("Can't submit: you must accept the terms before submit")
+        
+        if (checkLengthOfErrorsContainer) { 
+            alert('The rest of the fields are ok')
+        } else {
+            alert('And you have some other problems, please check red inputs')
+        }
+    }
 })
 
 makeBtn.addEventListener('click', event => {
@@ -663,35 +710,6 @@ window.addEventListener('scroll', () => {
 })
 
 scrollTopBtn.addEventListener('click', scrollToTop)
-  
-  
-registerForm.addEventListener('submit', event => {
-    event.preventDefault()
-    const checkLengthOfErrorsContainer = Object.entries(errorsContainer).length;
-
-    for (let input of inputs) {
-        if (!input.value && input.type !== 'checkbox') {
-            createError(input, 'is empty')
-        }
-    }
-
-    if (termsCheckbox.checked) {
-        if (!checkLengthOfErrorsContainer) {
-            formSubmit()
-            alert('Submitted!')
-        } else {
-            alert("Can't submit: you have some problems, please check red inputs")
-        }
-    } else {
-        alert("Can't submit: you must accept the terms before submit")
-        
-        if (checkLengthOfErrorsContainer) { 
-            alert('The rest of the fields are ok')
-        } else {
-            alert('And you have some other problems, please check red inputs')
-        }
-    }
-})
 
 
   
