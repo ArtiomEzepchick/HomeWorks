@@ -6,6 +6,14 @@ import './styles/footer.css'
 const li = document.createElement('li')
 const figure = document.createElement('figure')
 const img = document.createElement('img')
+const body = document.querySelector('body')
+const modalContainer = document.querySelector('.modal-container')
+const registerForm = document.getElementById('register-form')
+const registerBtn = document.getElementById('register-btn')
+const modalCloseBtn = document.querySelector('.close-modal-btn')
+const clearBtn = document.getElementById('clearBtn')
+const inputs = document.querySelectorAll('input')
+const termsCheckbox = document.getElementById('terms')
 const scrollTopBtn = document.getElementById('scroll-top-btn')
 const adsContainer = document.querySelector('.ads-container')
 const makeBtn = document.getElementById('make-btn')
@@ -19,9 +27,10 @@ const resetBtn = document.getElementById('reset-btn')
 const makeBtnOriginTextContent = makeBtn.firstChild.textContent
 const modelBtnOriginTextContent = modelBtn.firstChild.textContent
 const yearBtnOriginTextContent = yearBtn.firstChild.textContent
-const carsData = fetch('http://localhost:3000/cars').then((response) => response.json())
+const carsData = fetch('http://localhost:3000/cars').then(response => response.json()).catch(e => console.log(e))
 let temporaryCount = 0
 let temporaryIdsArray = []
+const errorsContainer = {}
 
 const state = {
     maxScroll: 240,
@@ -183,9 +192,153 @@ const scrollToTop = () => {
     }
 }
 
+const createError = (node, text) => {
+    const { name } = node
+    const label = document.querySelector(`label[for=${name}]`)
+    const span = document.querySelector(`span[data-error=${name}]`)
+    const errorMessage = `${label.textContent} ${text}`
+    span.innerText = errorMessage
+    errorsContainer[name] = errorMessage
+
+    if (node.classList.contains('success')) {
+        node.classList.remove('success')
+    }
+
+    node.classList.add('error')
+}
+
+const deleteError = (nodeName) => {
+    if (errorsContainer[nodeName]) {
+        delete errorsContainer[nodeName]
+        const span = document.querySelector(`span[data-error=${nodeName}]`)
+        span.innerText = ""
+    }
+}
+
+const checkEmail = (value) => {
+    const regExp = /^\S+@\S+\.\S+$/
+
+    return regExp.test(value)
+}
+
+const checkPassword = (value) => {
+    const regExpPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s)/
+
+    return regExpPassword.test(value)
+}
+
+const clearForm = () => {
+    for (let input of inputs) {
+        if (input.type !== 'checkbox') {
+            input.value = ''
+            input.classList.remove('error', 'success')
+            deleteError(input.name)
+        }
+    }
+    termsCheckbox.checked = ''
+}
+
+function destructureForm(formNode) {
+    const obj = {}
+    const { elements } = formNode
+    const data = Array.from(elements)
+        .filter((item) => !!item.name && item !== termsCheckbox)
+        .map(item => {
+            const { name, value } = item
+            return obj[name] = value
+        })
+    return obj
+}
+
+async function sendFormData(data) {
+    return await fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+}
+
+async function formSubmit() {
+    const data = destructureForm(registerForm)
+    const response = await sendFormData(data)
+    return response
+}
+
 document.addEventListener('DOMContentLoaded', () => carsData
 .then(data => resultBtn.innerHTML = `<span class='pointer-events-none'>View <b class = 'color-aqua'>${data.length}</b> ads</span>`)
 .catch(e => console.log(e.message)))
+
+for (let input of inputs) {
+    input.addEventListener('focus', () => {
+        input.classList.remove('error')
+        deleteError(input.name)
+    })
+
+    input.addEventListener('blur', event => {
+        if (input.name !== 'pass') {
+            input.value = input.value.trim()
+        }
+
+        if (input.name !== 'fname' && input.name !== 'lname' && input.name !== 'terms') {
+            if (input.value.length <= 4) {
+                createError(input, 'must contain at least 5 characters')
+                return
+            }
+
+            if (input.value.includes(' ')) {
+                createError(input, "can't contain spaces")
+                return
+            }
+
+            if (input.name === 'email') {
+                const isValid = checkEmail(event.target.value)
+                if (!isValid) {
+                    createError(input, 'has wrong format')
+                    return
+                }
+            }
+
+            if (input.name === 'pass') {
+                const isValid = checkPassword(event.target.value)
+                if (!isValid) {
+                    alert('Your password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 symbol')
+                    createError(input, 'has wrong format')
+                    return
+                }
+            }
+        }
+
+        if (!event.target.value) {
+            createError(input, 'is empty')
+            return
+        }
+
+        if (errorsContainer[input.name]) {
+            deleteError(input.name)
+            input.classList.add('success')
+        } else {
+            input.classList.add('success')
+        }
+    })
+}
+
+clearBtn.addEventListener('click', event => {
+    event.preventDefault()
+    clearForm()
+})
+
+registerBtn.addEventListener('click', () => {
+    body.classList.add('active-modal')
+    modalContainer.classList.remove('hidden')
+    modalContainer.classList.add('active-flex')
+})
+
+modalCloseBtn.addEventListener('click', () => {
+    body.classList.remove('active-modal')
+    modalContainer.classList.remove('active-flex')
+    modalContainer.classList.add('hidden')
+    clearForm()
+})
 
 makeBtn.addEventListener('click', event => {
     let count = 0
@@ -366,7 +519,7 @@ yearBtn.addEventListener('mouseout', event => {
     }
 })
 
-resetBtn.addEventListener('click', (event) => {
+resetBtn.addEventListener('click', event => {
     event.preventDefault()
     const target = event.target
     
@@ -392,7 +545,7 @@ resetBtn.addEventListener('click', (event) => {
     }
 })
 
-resultBtn.addEventListener('click', (event) => {
+resultBtn.addEventListener('click', event => {
     event.preventDefault()
     const target = event.target
     
@@ -459,6 +612,13 @@ window.addEventListener('click', event => {
     removeBtnListClassActive(modelBtn, modelList, target)
     removeBtnListClassActive(yearBtn, yearList, target)
 
+    if (target === modalContainer) {
+        body.classList.remove('active-modal')
+        modalContainer.classList.remove('active-flex')
+        modalContainer.classList.add('hidden')
+        clearForm()
+    }
+
     if (target !== modelBtn && target !== yearBtn) {
         if (modelBtn.contains(modelMessage)) {
             modelBtn.removeChild(modelMessage)
@@ -475,6 +635,8 @@ window.addEventListener('click', event => {
 })
 
 window.addEventListener('scroll', () => {
+    trackScroll()
+
     if (window.scrollY > state.maxScroll) {
         state.maxScroll += 400
         carsData.then(data => {
@@ -500,6 +662,36 @@ window.addEventListener('scroll', () => {
     }
 })
 
-window.addEventListener('scroll', trackScroll)
-
 scrollTopBtn.addEventListener('click', scrollToTop)
+  
+  
+registerForm.addEventListener('submit', event => {
+    event.preventDefault()
+    const checkLengthOfErrorsContainer = Object.entries(errorsContainer).length;
+
+    for (let input of inputs) {
+        if (!input.value && input.type !== 'checkbox') {
+            createError(input, 'is empty')
+        }
+    }
+
+    if (termsCheckbox.checked) {
+        if (!checkLengthOfErrorsContainer) {
+            formSubmit()
+            alert('Submitted!')
+        } else {
+            alert("Can't submit: you have some problems, please check red inputs")
+        }
+    } else {
+        alert("Can't submit: you must accept the terms before submit")
+        
+        if (checkLengthOfErrorsContainer) { 
+            alert('The rest of the fields are ok')
+        } else {
+            alert('And you have some other problems, please check red inputs')
+        }
+    }
+})
+
+
+  

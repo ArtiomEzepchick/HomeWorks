@@ -1,5 +1,5 @@
 {
-  "cars": [ 
+  "cars": [
     {
       "id": 1,
       "make": "Mitsubishi",
@@ -202,14 +202,14 @@
       "model": "Corolla",
       "year": 2009,
       "color": "black"
-    },    
+    },
     {
       "id": 30,
       "make": "Toyota",
       "model": "Corolla",
       "year": 2008,
       "color": "grey"
-    },    
+    },
     {
       "id": 31,
       "make": "Toyota",
@@ -307,6 +307,36 @@
       "model": "Qashqai",
       "year": 2016,
       "color": "black"
+    }
+  ],
+  "users": [
+    {
+      "fname": "Артем",
+      "lname": "Езепчик",
+      "email": "artem.ezepchik@gmail.com",
+      "pass": "258102Aa!",
+      "id": 1
+    },
+    {
+      "fname": "Артем",
+      "lname": "Езепчик",
+      "email": "artem.ezepchik@gmail.com",
+      "pass": "258102Aa!",
+      "id": 2
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "email": "",
+      "pass": "",
+      "id": 3
+    },
+    {
+      "fname": "Артем",
+      "lname": "Езепчик",
+      "email": "artem.ezepchik@gmail.com",
+      "pass": "258102Aa!",
+      "id": 4
     }
   ]
 }

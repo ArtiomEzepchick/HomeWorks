@@ -78,6 +78,9 @@ module.exports = {
         port: 4200,
         hot: isDev
     },
+    experiments: {
+        topLevelAwait: true
+    },
     plugins: plugins(),
     module: {
         rules: [

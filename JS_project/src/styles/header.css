@@ -1,4 +1,3 @@
-
 header {
     display: flex;
     justify-content: space-between;
@@ -23,10 +22,197 @@ h1
 }
 
 header
-#registration-btn {
+#register-btn {
     justify-content: center;
     width: 10rem;
     background-color: #219ebc;
     color: white;
     font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+header
+#register-btn:hover {
+    background-color: #1d7f97;
+}
+
+header
+.modal-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000085;
+    z-index: 30;
+    animation: showModal 0.3s ease-in;
+}
+
+header
+.modal-container.active-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header
+.modal-container 
+#register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    padding: 1.2rem;
+    border: 1px solid #888;
+    border-radius: 2rem;
+    width: 120%;
+    z-index: 40;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content 
+h2 {
+    text-align: center;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.close-modal-btn {
+    position: absolute;
+    right: -12%;
+    top: -12%;
+    color: #b8b8b8;
+    font-size: 4rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.close-modal-btn:hover {
+    color: #ffffff;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.fitem {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.fitem 
+input {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.fitem 
+span {
+    position: absolute;
+    bottom: -1rem;
+    right: 0;
+    color: red;
+    font-size: 0.8rem;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.form-btn {
+    width: 5rem;
+    padding: 0.2rem;
+    margin: 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: #26afd1;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.form-btn:hover {
+    background-color: #1d8aa5;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.fitem 
+input.error {
+    border: 1px solid red;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.fitem 
+input.success {
+    border: 1px solid blue;
+}
+
+header
+.modal-container 
+#register-form
+.modal-content
+.terms {
+    padding: 2rem 0;
+    text-align: center;
+    user-select: none;
+}
+
+@keyframes showModal {
+    from {
+        opacity: 0;
+        background-color: none;
+    }
+
+    to {
+        opacity: 1;
+        background-color: #00000085;
+    }
 }

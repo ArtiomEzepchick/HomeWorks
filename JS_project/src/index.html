@@ -22,13 +22,47 @@
             <i id="registered-mark" class="fa-solid fa-registered"></i>
             - Car Ads For Sale
         </h1>
-        <div id="registration-btn" class="btn">
-            <span>Register Here</span>
+        <button id="register-btn" class="btn">Register Here</button>
+        <div class="modal-container hidden">
+            <form id="register-form" action="http://localhost:3000/users" method="post">
+                <div class="modal-content">
+                    <h2>Registration form</h2>
+                    <i class="fa-solid fa-circle-xmark close-modal-btn"></i>
+                    <div class="fitem">
+                        <label for="fname">First name</label>
+                        <input type="text" id="fname" name="fname">
+                        <span data-error="fname"></span>
+                    </div>
+                    <div class="fitem">
+                        <label for="lname">Last name</label>
+                        <input type="text" id="lname" name="lname">
+                        <span data-error="lname"></span>
+                    </div>
+                    <div class="fitem">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email">
+                        <span data-error="email"></span>
+                    </div>
+                    <div class="fitem">
+                        <label for="pass">Password</label>
+                        <input type="password" id="pass" name="pass">
+                        <span data-error="pass"></span>
+                    </div>
+                    <div class="terms">
+                        <label for="terms">I accept the terms of this agreement</label>
+                        <input type="checkbox" id="terms" name="terms">
+                    </div>
+                    <div class="actions">
+                        <button class="form-btn" id="clearBtn">Clear</button>
+                        <button class="form-btn" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </header>
 
     <main>
-        <form class="filters-container">
+        <div class="filters-container">
             <div class="filters-main-section">
                 <h2>Find Your Car In Phew Steps:</h2>
                 <ul class="dropdown-lists-container">
@@ -54,7 +88,7 @@
                 <button id="reset-btn" class="hidden"><b class="color-aqua pointer-events-none">Reset</b></button>
                 <button id="result-btn" class="btn"></button>
             </div>
-        </form>
+        </div>
         <div class="ads-container">
 
         </div>

@@ -5,9 +5,15 @@
 }
 
 body,
+#register-btn,
 #reset-btn, 
-#result-btn {
+#result-btn,
+.form-btn {
     font-family: 'Anek Malayalam', sans-serif;
+}
+
+body.active-modal {
+    overflow: hidden;
 }
 
 ul {
