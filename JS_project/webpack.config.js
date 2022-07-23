@@ -5,7 +5,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
@@ -41,6 +40,10 @@ const plugins = () => {
                     {
                         from: path.resolve(__dirname, 'src/favicon.ico'),
                         to: path.resolve(__dirname, 'dist')
+                    },
+                    {
+                        from: path.resolve(__dirname, 'src/assets/images'),
+                        to: path.resolve(__dirname, 'dist/assets/images')
                     }
                 ]
             }),
@@ -48,10 +51,6 @@ const plugins = () => {
                 filename: '[name].[contenthash].css',
             })
         ]
-
-        if (isProd) {
-            base.push(new BundleAnalyzerPlugin())
-        }
 
         return base
 }
@@ -65,6 +64,7 @@ module.exports = {
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
+        assetModuleFilename: 'assets/images/[name][ext]',
     },
     resolve: {
         extensions: ['.js', '.json'],
@@ -78,6 +78,9 @@ module.exports = {
         port: 4200,
         hot: isDev
     },
+    experiments: {
+        topLevelAwait: true
+    },
     plugins: plugins(),
     module: {
         rules: [
@@ -90,7 +93,7 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource'
+                type: 'asset/resource',
             },
         ]
     }

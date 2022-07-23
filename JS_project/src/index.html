@@ -2,17 +2,122 @@
 <html lang="en">
 
 <head>
+    <title>CAFS - Сar Ads For Sale!</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-  UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico" type="image/ico">
-    <title>First JS project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/817233ce3d.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="container">
+    <header>
+        <i id="main-logo" class="fa-solid fa-car-rear"></i>
+        <h1>
+            WELCOME TO
+            <span class="color-aqua">CAFS</span>
+            <i id="registered-mark" class="fa-solid fa-registered"></i>
+            - Car Ads For Sale
+        </h1>
+        <button id="login-btn" class="hidden">Login</button>
+        <button id="register-btn" class="btn">Register Here</button>
+        <div class="modal-container hidden">
+            <form id="register-form" action="http://localhost:3000/users" method="post">
+                <div class="modal-content">
+                    <h2>Registration form</h2>
+                    <i class="fa-solid fa-circle-xmark close-modal-btn"></i>
+                    <div class="fitem">
+                        <label for="fname">First name</label>
+                        <input type="text" id="fname" name="fname">
+                        <span data-error="fname"></span>
+                    </div>
+                    <div class="fitem">
+                        <label for="lname">Last name</label>
+                        <input type="text" id="lname" name="lname">
+                        <span data-error="lname"></span>
+                    </div>
+                    <div class="fitem">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email">
+                        <span data-error="email"></span>
+                    </div>
+                    <div class="fitem">
+                        <label for="pass">Password</label>
+                        <input type="password" id="pass" name="pass">
+                        <span data-error="pass"></span>
+                    </div>
+                    <div class="terms">
+                        <label for="terms">I accept the terms of this agreement</label>
+                        <input type="checkbox" id="terms" name="terms">
+                    </div>
+                    <div class="actions">
+                        <button class="form-btn" id="clearBtn">Clear</button>
+                        <button class="form-btn" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </header>
 
-    </div>
+    <main>
+        <div class="filters-container">
+            <div class="filters-main-section">
+                <h2>Find Your Car In Phew Steps:</h2>
+                <ul class="dropdown-lists-container">
+                    <li id="make-btn" class="btn dropdown-btn">
+                        Choose a make...<i class="fa-solid fa-arrow-down pointer-events-none"></i>
+                        <ul id="dropdown-make-list" class="dropdown-list hidden">
+
+                        </ul>
+                    </li>
+                    <li id="model-btn" class="btn dropdown-btn background-grey">
+                        Choose a model...<i class="fa-solid fa-arrow-down pointer-events-none"></i>
+                        <ul id="dropdown-model-list" class="dropdown-list hidden">
+
+                        </ul>
+                    </li>
+                    <li id="year-btn" class="btn dropdown-btn background-grey">
+                        Choose a year...<i class="fa-solid fa-arrow-down pointer-events-none"></i>
+                        <ul id="dropdown-year-list" class="dropdown-list hidden">
+
+                        </ul>
+                    </li>
+                </ul>
+                <button id="reset-btn" class="hidden"><b class="color-aqua pointer-events-none">Reset</b></button>
+                <button id="result-btn" class="btn"></button>
+            </div>
+        </div>
+        <div class="ads-container">
+
+        </div>
+        <a id="scroll-top-btn" title="Up"><i class="fa-solid fa-circle-up"></i></a>
+    </main>
+
+    <footer>
+        <div class="copyright-container">
+            <div class="copyright-info">
+                <span>&#169; 2022 First JS-project made by Artsiom Ezepchik.</span>
+            </div>
+            <div class="copyright-links">
+                <span>Contact me:</span>
+                <a href="https://www.instagram.com/art_ezepchik/" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://t.me/ArtiomEzepchik" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://vk.com/megustaaa/" target="_blank">
+                    <i class="fab fa-vk"></i>
+                </a>
+                <a href="https://www.youtube.com/user/tyomkarulez" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
